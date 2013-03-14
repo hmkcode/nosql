@@ -46,7 +46,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/3.1.4.RELEASE/spring-tx-3.1.4.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME"/>
-	<classpathentry kind="lib" path="C:/Users/HMK/Downloads/jars/hibernate-validator-4.3.0.Final/dist/lib/required/validation-api-1.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="C:/Users/HMK/Downloads/jars/slf4j-1.7.2/slf4j-nop-1.7.2.jar"/>
+	<classpathentry kind="lib" path="hibernate-validator-4.3.0.Final/dist/lib/required/validation-api-1.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="slf4j-1.7.2/slf4j-nop-1.7.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
