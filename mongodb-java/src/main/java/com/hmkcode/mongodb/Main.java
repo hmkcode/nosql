@@ -2,6 +2,8 @@ package com.hmkcode.mongodb;
  
 import java.net.UnknownHostException;
 import java.util.Date;
+import java.util.LinkedList;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -14,6 +16,20 @@ import com.mongodb.MongoException;
  * 
  */
 public class Main {
+	
+	static String array_names[] = {"Jonh","Tim","Brit","Robin","Smith","Lora","Jennifer","Lyla","Victor","Adam"};
+	static String array_address[][] ={
+		{"US", "NY", "New York"},
+		{"US", "NY", "Buffalo"},
+		{"US", "CA", "Los Angeles"},
+		{"US", "CA", "San Francisco"},
+		{"US", "CA", "San Diego"},
+		{"US", "NJ", "Newark"},
+		{"US", "NJ", "Jersey City"},
+		{"US", "FL", " Miami"},
+		{"US", "FL", " Orlando"},
+		{"US", "TX", " Houston"},
+	};
   public static void main(String[] args) {
  
     try {
@@ -31,12 +47,26 @@ public class Main {
  
 	/**** Insert ****/
 	// create a document to store key and value
+	
 	BasicDBObject document ;
-	for(int i = 0 ; i < 10 ; i++){
+	String address[];
+	for(int i = 0 ; i < array_names.length ; i++){
 		document = new BasicDBObject();
-		document.append("name", "person-"+i);
+		//value -> String
+		document.append("name", array_names[i]); 
+		// value -> int
 		document.append("age", (int)(Math.random()*60));
+		// value -> date
 		document.append("join", new Date());
+		// value -> array
+		document.append("friends", pickFriends()); 
+		
+		address = pickAddress();
+		// value --> document
+		document.append("address", new BasicDBObject("country",address[0])
+									.append("State", address[1])
+									.append("City", address[2])); 
+
 		collection.insert(document);
 
 	}
@@ -97,5 +127,24 @@ public class Main {
 	e.printStackTrace();
     }
  
+  }
+  //----------------------------------------------------
+  //These methods are just jused to build random data
+  private static String[] pickFriends(){
+	  int numberOfFriends = (int) (Math.random()* 10);
+	  LinkedList<String> friends = new LinkedList<String>();
+	  int random = 0;
+	  while(friends.size() < numberOfFriends){
+		  random = (int) (Math.random()*10);
+		  if(!friends.contains(array_names[random]))
+			  friends.add(array_names[random]);
+			  
+	  }
+	  String a[] = {};
+	  return  friends.toArray(a);
+  }
+  private static String[] pickAddress(){
+	  int random = (int) (Math.random()*10);
+	  return array_address[random];
   }
 }
