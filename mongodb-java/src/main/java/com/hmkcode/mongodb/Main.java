@@ -1,7 +1,12 @@
 package com.hmkcode.mongodb;
  
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.mongodb.BasicDBObject;
@@ -17,19 +22,22 @@ import com.mongodb.MongoException;
  */
 public class Main {
 	
-	static String array_names[] = {"Jonh","Tim","Brit","Robin","Smith","Lora","Jennifer","Lyla","Victor","Adam"};
+
+	static String array_names[] = {"John","Tim","Brit","Robin","Smith","Lora","Jennifer","Lyla","Victor","Adam"};
+	
 	static String array_address[][] ={
-		{"US", "NY", "New York"},
-		{"US", "NY", "Buffalo"},
-		{"US", "CA", "Los Angeles"},
-		{"US", "CA", "San Francisco"},
-		{"US", "CA", "San Diego"},
-		{"US", "NJ", "Newark"},
-		{"US", "NJ", "Jersey City"},
 		{"US", "FL", " Miami"},
 		{"US", "FL", " Orlando"},
+		{"US", "CA", "San Diego"},
+		{"US", "FL", " Orlando"},
+		{"US", "FL", " Orlando"},
+		{"US", "NY", "New York"},
+		{"US", "NY", "Buffalo"},
 		{"US", "TX", " Houston"},
+		{"US", "CA", "San Diego"},
+		{"US", "TX", " Houston"}
 	};
+	
   public static void main(String[] args) {
  
     try {
@@ -64,8 +72,8 @@ public class Main {
 		address = pickAddress();
 		// value --> document
 		document.append("address", new BasicDBObject("country",address[0])
-									.append("State", address[1])
-									.append("City", address[2])); 
+									.append("state", address[1])
+									.append("city", address[2])); 
 
 		collection.insert(document);
 
@@ -87,10 +95,10 @@ public class Main {
 	//------------------------------------
 
 	// get documents by query
-	BasicDBObject query = new BasicDBObject("age", new BasicDBObject("$gt", 30));
+	BasicDBObject query = new BasicDBObject("age", new BasicDBObject("$gt", 40));
 
 	cursor = collection.find(query);
-	System.out.println("Person with age > 30 --> "+cursor.count());
+	System.out.println("Person with age > 40 --> "+cursor.count());
 	
  
 	/**** Update ****/
@@ -105,7 +113,7 @@ public class Main {
  
 	/**** Find and display ****/
 	cursor = collection.find(query);
-	System.out.println("Person with age > 30 after update --> "+cursor.count());
+	System.out.println("Person with age > 40 after update --> "+cursor.count());
 	
 	
 	//get all again
